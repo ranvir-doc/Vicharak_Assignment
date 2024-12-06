@@ -1,0 +1,28 @@
+#ifndef SHA256_H
+#define SHA256_H
+#include<string>
+#include<cstdint>
+class SHA256{
+    public : 
+    SHA256();
+    void addData(const uint8_t, size_t lenth);
+    std::string computeHash();
+    private:
+        static const uint32_t ROUND_CONSTANT[64];
+        uint32_t state[8];
+        uint8_t buffer[16];
+        uint64_t totalBitsProcessed;
+        size_t bufferFillSize;
+        void processBlock(const uint8_t*block);
+        static uint32_t rotateRight(uint32_t value,uint32_t shift);
+        static uint32_t choose(uint32_t x, uint32_t y, uint32_t z);
+        static uint32_t majority(uint32_t x, uint32_t y, uint32_t z);
+        static uint32_t upperSigma0(uint32_t x);
+        static uint32_t upperSigma1(uint32_t x);
+        static uint32_t lowerSigma0(uint32_t x);
+        static uint32_t lowerSigma1(uint32_t x);
+
+
+};
+
+#endif
